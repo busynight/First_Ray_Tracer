@@ -14,19 +14,6 @@
 
 #include "SingleSphere.h"
 #include "MultipleObjects.h"
-#include "RayCast.h"
-
-// cameras
-
-#include "Pinhole.h"
-
-// lights
-
-#include "Directional.h"
-
-// materials
-
-#include "Matte.h"
 
 // utilities
 
@@ -38,21 +25,16 @@
 
 // build functions
 
-#include "BuildShadedObjects.cpp"
+#include "BuildSingleSphere.cpp"
+//#include "BuildMultipleObjects.cpp"
+//#include "BuildBBCoverPic.cpp"
 
 
 // -------------------------------------------------------------------- default constructor
 
-// tracer_ptr is set to NULL because the build functions will always construct the appropriate tracer
-// ambient_ptr is set to a default ambient light because this will do for most scenes
-// camera_ptr is set to NULL because the build functions will always have to construct a camera
-// and set its parameters
-
 World::World(void)
 	:  	background_color(black),
-		tracer_ptr(NULL),
-		ambient_ptr(new Ambient),
-		camera_ptr(NULL)
+		tracer_ptr(NULL)
 {}
 
 
@@ -64,22 +46,9 @@ World::~World(void) {
 	if(tracer_ptr) {
 		delete tracer_ptr;
 		tracer_ptr = NULL;
-	}
-	
-		
-	if (ambient_ptr) {
-		delete ambient_ptr;
-		ambient_ptr = NULL;
-	}
-			
-		
-	if (camera_ptr) {
-		delete camera_ptr;
-		camera_ptr = NULL;
-	}
+	}	
 	
 	delete_objects();	
-	delete_lights();				
 }
 
 
@@ -95,7 +64,7 @@ World::render_scene(void) const {
 	int 		hres 	= vp.hres;
 	int 		vres 	= vp.vres;
 	float		s		= vp.s;
-	float		zw		= 100.0;				// hardwired in
+	float		zw		= 100.0;			// hardwired in
 
 	ray.d = Vector3D(0, 0, -1);
 	
@@ -137,6 +106,7 @@ World::clamp_to_color(const RGBColor& raw_color) const {
 
 
 // ---------------------------------------------------------------------------display_pixel
+
 // raw_color is the pixel color computed by the ray tracer
 // its RGB floating point components can be arbitrarily large
 // mapped_color has all components in the range [0, 1], but still floating point
@@ -168,37 +138,26 @@ World::display_pixel(const int row, const int column, const RGBColor& raw_color)
                              (int)(mapped_color.b * 255));
 }
 
-// ----------------------------------------------------------------------------- hit_objects
+
+
+// ----------------------------------------------------------------------------- hit_bare_bones_objects
 
 ShadeRec									
-World::hit_objects(const Ray& ray) {
-
+World::hit_bare_bones_objects(const Ray& ray) {
 	ShadeRec	sr(*this); 
-	double		t;
-	Normal normal;
-	Point3D local_hit_point;
-	double		tmin 			= kHugeValue;
+	double		t; 			
+	float		tmin 			= kHugeValue;
 	int 		num_objects 	= objects.size();
 	
 	for (int j = 0; j < num_objects; j++)
 		if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
 			sr.hit_an_object	= true;
-			tmin 				= t;
-			sr.material_ptr     = objects[j]->get_material();
-			sr.hit_point 		= ray.o + t * ray.d;
-			normal 				= sr.normal;
-			local_hit_point	 	= sr.local_hit_point;
+			tmin 				= t; 
+			sr.color			= objects[j]->get_color(); 
 		}
-  
-	if(sr.hit_an_object) {
-		sr.t = tmin;
-		sr.normal = normal;
-		sr.local_hit_point = local_hit_point;
-	}
 		
-	return(sr);   
+	return (sr);   
 }
-
 
 
 //------------------------------------------------------------------ delete_objects
@@ -218,18 +177,4 @@ World::delete_objects(void) {
 	objects.erase (objects.begin(), objects.end());
 }
 
-
-//------------------------------------------------------------------ delete_lights
-
-void
-World::delete_lights(void) {
-	int num_lights = lights.size();
-	
-	for (int j = 0; j < num_lights; j++) {
-		delete lights[j];
-		lights[j] = NULL;
-	}	
-	
-	lights.erase (lights.begin(), lights.end());
-}
 

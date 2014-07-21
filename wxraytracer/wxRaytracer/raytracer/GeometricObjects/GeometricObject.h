@@ -1,14 +1,16 @@
 #ifndef __GEOMETRIC_OBJECT__
 #define __GEOMETRIC_OBJECT__
 
-class Material;
-	
+// this file contains the declaration of the class GeometricObject
+
+#include "RGBColor.h"
 #include "Point3D.h"
+#include "Normal.h"
 #include "Ray.h"
 #include "ShadeRec.h"
 
-
-//----------------------------------------------------------------------------------------------------- Class GeometricObject
+#include "Constants.h"
+					
 
 class GeometricObject {	
 	
@@ -26,28 +28,50 @@ class GeometricObject {
 			
 		virtual bool 												 
 		hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
-				
-		Material*						
-		get_material(void) const;
+		
 
-		virtual void 							// needs to virtual so that it can be overriden in Compound
-		set_material(Material* mPtr); 			
+		// the following three functions are only required for Chapter 3
+		
+		void
+		set_color(const RGBColor& c);
+				
+		void
+		set_color(const float r, const float g, const float b);
+		
+		RGBColor
+		get_color(void);
 
 	
 	protected:
 	
-		mutable Material*   material_ptr;   	// mutable allows Compound::hit, Instance::hit and Grid::hit to assign to material_ptr. hit functions are const
+		RGBColor   color;						// only used for Bare Bones ray tracing
 	
 		GeometricObject&						// assignment operator
 		operator= (const GeometricObject& rhs);
 };
 
 
-// ------------------------------------------------------------------------- get_material
+// --------------------------------------------------------------------  set_colour
 
-inline Material* 
-GeometricObject::get_material(void) const {
-	return (material_ptr);
+inline void
+GeometricObject::set_color(const RGBColor& c) {
+	color = c;
+}
+
+// --------------------------------------------------------------------  set_colour
+
+inline void 
+GeometricObject::set_color(const float r, const float g, const float b) {
+	color.r = r;
+	color.b = b;
+	color.g = g;
+}
+
+// --------------------------------------------------------------------  get_colour
+
+inline RGBColor 
+GeometricObject::get_color(void) {
+	return (color);
 }
 
 #endif

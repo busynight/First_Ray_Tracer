@@ -1,7 +1,7 @@
 #ifndef __VECTOR_3D__
 #define __VECTOR_3D__
 
-// This file contains the defintion of the class Vector3D
+// This file contains the declaration of the class Vector3D
 
 #include "Matrix.h"
 

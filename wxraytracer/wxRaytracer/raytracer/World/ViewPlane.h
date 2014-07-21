@@ -8,7 +8,6 @@ class ViewPlane {
 		int 			hres;   					// horizontal image resolution 
 		int 			vres;   					// vertical image resolution
 		float			s;							// pixel size
-		int				num_samples;				// number of samples per pixel
 		
 		float			gamma;						// gamma correction factor
 		float			inv_gamma;					// the inverse of the gamma correction factor
@@ -39,10 +38,7 @@ class ViewPlane {
 		set_gamma(const float g);
 		
 		void
-		set_gamut_display(const bool show);	
-		
-		void
-		set_samples(const int n);			
+		set_gamut_display(const bool show);				
 };
 
 
@@ -88,12 +84,5 @@ ViewPlane::set_gamut_display(const bool show) {
 	show_out_of_gamut = show;
 }
 
-
-// ------------------------------------------------------------------------------ set_samples
-
-inline void
-ViewPlane::set_samples(const int n) {
-	num_samples = n;
-}
 
 #endif
