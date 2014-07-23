@@ -1,130 +1,81 @@
-// This file contains the definition of the class Vector3D
 
 #include <math.h>
 
 #include "Vector3D.h"
-#include "Normal.h"
 #include "Point3D.h"
+#include "Normal.h"
 
-// ---------------------------------------------------------- default constructor
+Vector3D::Vector3D(void): x(0.0), y(0.0), z(0.0) {}
 
-Vector3D::Vector3D(void)
-	 : x(0.0), y(0.0), z(0.0)							
-{}
+Vector3D::Vector3D(double a): x(a), y(a), z(a){}
 
-// ---------------------------------------------------------- constructor
+Vector3D::Vector3D(double nX, double nY, double nZ): x(nX), y(nY), z(nZ) {}
 
-Vector3D::Vector3D(double a)
-	 : x(a), y(a), z(a)							
-{}
+Vector3D::Vector3D(const Vector3D& v): x(v.x), y(v.y), z(v.z){}
 
-// ---------------------------------------------------------- constructor
+Vector3D::Vector3D(const Normal& n)	: x(n.x), y(n.y), z(n.z){}
 
-Vector3D::Vector3D(double _x, double _y, double _z)	 
-	: x(_x), y(_y), z(_z)
-{}
+Vector3D::Vector3D(const Point3D& p): x(p.x), y(p.y), z(p.z){}
 
-// ---------------------------------------------------------- copy constructor
+Vector3D::~Vector3D(void){}
 
-Vector3D::Vector3D(const Vector3D& vector)
-	: x(vector.x), y(vector.y), z(vector.z)
-{}
+Vector3D& Vector3D::operator= (const Vector3D& rhs){
 
+	if(this == &rhs)
+		return *this;
 
-// ---------------------------------------------------------- constructor
-// constructs a vector from a normal
+	x = rhs.x; 
+	y = rhs.y; 
+	z = rhs.z;
 
-Vector3D::Vector3D(const Normal& n)	 
-	: x(n.x), y(n.y), z(n.z)
-{}
+	return *this;
+}
 
-// ---------------------------------------------------------- constructor
-// constructs a vector from a point
-// this is used in the ConcaveHemisphere hit functions
+Vector3D& Vector3D::operator= (const Normal& rhs){
 
-Vector3D::Vector3D(const Point3D& p)	 
-	: x(p.x), y(p.y), z(p.z)
-{}
+	x = rhs.x; 
+	y = rhs.y; 
+	z = rhs.z;
 
+	return *this;
+}
 
-// ---------------------------------------------------------- destructor
+Vector3D& Vector3D::operator= (Point3D& rhs){
 
-Vector3D::~Vector3D (void) 							
-{}
+	x = rhs.x; 
+	y = rhs.y; 
+	z = rhs.z;
 
+	return *this;
+}
 
+double Vector3D::length (void){
 
-// ---------------------------------------------------------- assignment operator
+	return  sqrt(x * x + y * y + z * z) ;
+}
 
-Vector3D& 
-Vector3D::operator= (const Vector3D& rhs) {
-	if (this == &rhs)
-		return (*this);
+void Vector3D::normalize(void){
 
-	x = rhs.x; y = rhs.y; z = rhs.z;
+	double len = sqrt(x * x + y * y + z * z) ;
 
-	return (*this);
+	x /= len;
+	y /= len;
+	z /= len;
 }
 
 
-// ----------------------------------------------------------- assignment operator
-// assign a Normal to a vector
+Vector3D& Vector3D::hat(void){
 
-Vector3D& 
-Vector3D::operator= (const Normal& rhs) {
-	x = rhs.x; y = rhs.y; z = rhs.z;
-	return (*this);
+	double len = sqrt(x * x + y * y + z * z) ;
+
+	x /= len;
+	y /= len;
+	z /= len;
+	return *this;
 }
 
-
-// ---------------------------------------------------------- assignment operator 
-// assign a point to a vector
-
-Vector3D& 												
-Vector3D::operator= (const Point3D& rhs) {
-	x = rhs.x; y = rhs.y; z = rhs.z;
-	return (*this);
-}
-
-
-// ----------------------------------------------------------  length
-// length of the vector
-
-double													
-Vector3D::length(void) {
-	return (sqrt(x * x + y * y + z * z));
-}
-
-
-// ----------------------------------------------------------  normalize
-// converts the vector to a unit vector
-
-void 													
-Vector3D::normalize(void) {	
-	double length = sqrt(x * x + y * y + z * z);
-	x /= length; y /= length; z /= length;
-}
-
-
-// ----------------------------------------------------------  hat
-// converts the vector to a unit vector and returns the vector
-
-Vector3D& 													
-Vector3D::hat(void) {	
-	double length = sqrt(x * x + y * y + z * z);
-	x /= length; y /= length; z /= length;
-	return (*this);
-} 
-
-
-// non-member function
-
-// ----------------------------------------------------------  operator* 
-// multiplication by a matrix on the left
-
-Vector3D 
-operator* (const Matrix& mat, const Vector3D& v) {
-	return (Point3D(mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z,
+Vector3D operator* (const Matrix& mat, const Vector3D& v) {
+	return (Vector3D(mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z,
 					mat.m[1][0] * v.x + mat.m[1][1] * v.y + mat.m[1][2] * v.z,
 					mat.m[2][0] * v.x + mat.m[2][1] * v.y + mat.m[2][2] * v.z));
 }

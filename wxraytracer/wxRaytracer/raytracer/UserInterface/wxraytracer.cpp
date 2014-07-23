@@ -280,7 +280,7 @@ void RenderCanvas::OnRenderCompleted( wxCommandEvent& event )
       long interval = timer->Time();
    
       wxTimeSpan timeElapsed(0, 0, 0, interval);
-      wxString timeString = timeElapsed.Format(wxT("Elapsed Time: %H:%M:%S"));
+      wxString timeString = timeElapsed.Format(wxT("Elapsed Time: %H:%M:%pixel_size"));
       wxGetApp().SetStatusText( timeString, 1);
 
       delete timer;
@@ -362,8 +362,8 @@ void RenderCanvas::OnTimerUpdate( wxTimerEvent& event )
    
    wxTimeSpan timeRemaining(0, 0, 0, msecRemain);
    
-   wxString timeRemainString = timeRemaining.Format(wxT(" / ETA: %H:%M:%S"));
-   wxString timeString = timeElapsed.Format(wxT("Elapsed Time: %H:%M:%S"));
+   wxString timeRemainString = timeRemaining.Format(wxT(" / ETA: %H:%M:%pixel_size"));
+   wxString timeString = timeElapsed.Format(wxT("Elapsed Time: %H:%M:%pixel_size"));
    
    //only display ETA if something has been completed
    if(msecRemain >= 0)
@@ -383,10 +383,10 @@ void RenderCanvas::renderStart(void)
    wxGetApp().SetStatusText( wxT( "Rendering..." ) );
    
    pixelsRendered = 0;
-   pixelsToRender = w->vp.hres * w->vp.vres;
+   pixelsToRender = w->vp.hor_res * w->vp.ver_res;
    
    //set the background
-   wxBitmap bitmap(w->vp.hres, w->vp.vres, -1);
+   wxBitmap bitmap(w->vp.hor_res, w->vp.ver_res, -1);
    wxMemoryDC dc;
    dc.SelectObject(bitmap);
    dc.SetBackground(*wxGREY_BRUSH);
@@ -394,9 +394,9 @@ void RenderCanvas::renderStart(void)
    
    wxBitmap tile(bg_xpm);
    
-   for(int x = 0; x < w->vp.hres; x += 16)
+   for(int x = 0; x < w->vp.hor_res; x += 16)
    {
-      for(int y = 0; y < w->vp.vres; y += 16)
+      for(int y = 0; y < w->vp.ver_res; y += 16)
          dc.DrawBitmap(tile, x, y, FALSE);
    }
    

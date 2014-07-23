@@ -1,103 +1,88 @@
-// This file contains the definition of the class Matrix
-
 #include "Matrix.h"
 
-// ----------------------------------------------------------------------- default constructor
-// a default matrix is an identity matrix
 
-Matrix::Matrix(void) {	
-	for (int x = 0; x < 4; x++)
-		for (int y = 0; y < 4; y++) {
-			if (x == y)
-				m[x][y] = 1.0;
-			else
-				m[x][y] = 0.0;
-		}
+//default matrix is the identity matrix
+Matrix::Matrix(void){
+
+	for (unsigned int i = 0; i < 4; i++)
+		for (unsigned int j = 0; j < 4; j++)
+
+			//if the row and column is the same, 
+			//set it equal to 1
+			//else make it 0
+			(i == j)? 1: 0;
+
 }
 
 
-// ----------------------------------------------------------------------- copy constructor
+Matrix::Matrix(const Matrix& mat){
 
-Matrix::Matrix (const Matrix& mat) {
-	for (int x = 0; x < 4; x++)				
-		for (int y = 0; y < 4; y++)			
-			m[x][y] = mat.m[x][y];	
+	for (unsigned int i = 0; i < 4; i++)
+		for (unsigned int j = 0; j < 4; j++)
+			m[i][j] = mat.m[i][j];
+
+
 }
 
+Matrix& Matrix::operator= (const Matrix& rhs){
 
-// ----------------------------------------------------------------------- destructor
+	if(this == &rhs)
 
-Matrix::~Matrix (void) {}   
-
-
+		return *this;
 
 
-// ----------------------------------------------------------------------- assignment operator
+	for (unsigned int i = 0; i < 4; i++)		
+		for (unsigned int j = 0; j < 4; j++)
+			m[i][j] = rhs.m[i][j];
 
-Matrix& 
-Matrix::operator= (const Matrix& rhs) {
-	if (this == &rhs)
-		return (*this);
-
-	for (int x = 0; x < 4; x++)				
-		for (int y = 0; y < 4; y++)			
-			m[x][y] = rhs.m[x][y];	
-
-	return (*this);
+	return *this;
 }
 
+Matrix Matrix::operator* (const Matrix& mat) const{
 
-// ----------------------------------------------------------------------- operator*
-// multiplication of two matrices
+	Matrix result;
 
-Matrix 
-Matrix::operator* (const Matrix& mat) const {
-	Matrix 	product;
-	
-	for (int y = 0; y < 4; y++)
-		for (int x = 0; x < 4; x++) {
+	//for each column
+	for (int c = 0; c < 4; ++c){
+		// for each row
+		for(int r = 0; r < 4; ++r){
+
 			double sum = 0.0;
+			
+			//for each column of current matrix 
+			//and for each row in other matrix
+			for(int j = 0; j < 4; j++){
 
-			for (int j = 0; j < 4; j++)
-				sum += m[x][j] * mat.m[j][y];
- 
-			product.m[x][y] = sum;			
+				sum += m[r][j] * mat.m[j][c];
+			}
+			result.m[r][c] = sum;
 		}
+	}
 	
-	return (product);
+	return result;
+	
+}
+
+Matrix Matrix::operator/(const double d){
+
+	for (unsigned int i = 0; i < 4; i++)
+		for (unsigned int j = 0; j < 4; j++)
+			m[i][j] /= d;
+
+	return *this;
 }
 
 
-// ----------------------------------------------------------------------- operator/
-// division by a scalar
+void Matrix::set_identity(void){
 
-Matrix 
-Matrix::operator/ (const double d) {
-	for (int x = 0; x < 4; x++)				
-		for (int y = 0; y < 4; y++)			
-			m[x][y] = m[x][y] / d;	
+	for (unsigned int i = 0; i < 4; i++)
+		for (unsigned int j = 0; j < 4; j++)
 
-	return (*this);
+			//if the row and column is the same, 
+			//set it equal to 1
+			//else make it 0
+			(i == j)? 1: 0;
+
 }
 
-
-
-// ----------------------------------------------------------------------- set_identity
-// set matrix to the identity matrix
-
-void											
-Matrix::set_identity(void) {
-    for (int x = 0; x < 4; x++)
-		for (int y = 0; y < 4; y++) {
-			if (x == y)
-				m[x][y] = 1.0;
-			else
-				m[x][y] = 0.0;
-		}
-}
-
-
-
-
-
-
+Matrix::~Matrix(void){}

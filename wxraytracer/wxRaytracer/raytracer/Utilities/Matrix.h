@@ -7,33 +7,33 @@
 
 //----------------------------------------- class Matrix
 
-class Matrix {
-	
-	public:
-	
-		double	m[4][4];								// elements
-	
-		
-		Matrix(void);									// default constructor
+class Matrix
+{
+public:
 
-		Matrix(const Matrix& mat);						// copy constructor
-		
-		~Matrix (void);									// destructor
-			
-		Matrix& 										// assignment operator
-		operator= (const Matrix& rhs); 	
-			
-		Matrix 											// multiplication of two matrices
-		operator* (const Matrix& mat) const;
+	//default constructor
+	Matrix(void);
 
-		Matrix 											// divsion by a double
-		operator/ (const double d);
+	//copy constructor
+	Matrix(const Matrix& mat); 
 
-		void											// set to the identity matrix
-		set_identity(void);	
+	//destructor
+	~Matrix(void);
+
+	//assignment operator
+	Matrix& operator = (const Matrix& rightSided);
+
+	//multiplication of two matrices
+	Matrix operator* (const Matrix& mat) const;
+
+	//division by a scalar
+	Matrix operator/ (const double d);
+
+	//set matrix to an identity matrix
+	void set_identity(void);
+
+	//elements within matrix
+	double m[4][4];
 };
 
-
 #endif
-
-
