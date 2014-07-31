@@ -31,7 +31,6 @@
 
 World::World(void) : background_color(black), tracer_ptr(NULL){}
 
-
 World::~World(void) {
 	
 	if(tracer_ptr) {
@@ -43,7 +42,7 @@ World::~World(void) {
 
 
 // This uses orthographic viewing along the zw axis
-
+/*
 void World::render_scene(void) const {
 
 	RGBColor	pixel_color;	 	
@@ -62,6 +61,51 @@ void World::render_scene(void) const {
 			display_pixel(r, c, pixel_color);
 		}	
 }  
+
+
+//antialiasing technique with increased sampling for one pixel
+*/
+void World::render_scene(void) const{
+
+	RGBColor pixel_color;
+	Ray ray;
+	int 		hor_res 	= vp.hor_res;
+	int 		ver_res 	= vp.ver_res;
+	float		pixel_size		= vp.pixel_size;
+
+	float zw = 100.0;
+	int n = (int)sqrt((float)vp.num_samples);
+
+	Point3D pp;		//sample point on a pixel
+
+	ray.d = Vector3D(0,0,-1);
+
+	for (int r = 0; r < ver_res; r++){		//up
+		for(int c = 0; c <= hor_res; c++){  //across
+
+			pixel_color = black;
+			
+			for (int p = 0; p < n; p++){			//up pixel
+				for (int q = 0; q < n; q++){		//accross pixel
+					//random sampling
+					//pp.x = vp.pixel_size * (c - 0.5* vp.hor_res + (q + 0.5)  / n);
+					//pp.y = vp.pixel_size * (r - 0.5* vp.ver_res + (p + 0.5)  / n);
+					//jitter sampling
+					pp.x = vp.pixel_size * (c - 0.5* vp.hor_res + (q 
+						+ static_cast <float> (rand()) / static_cast <float> (RAND_MAX))  / n);
+					pp.y = vp.pixel_size * (r - 0.5* vp.ver_res + (p 
+						+ static_cast <float> (rand()) / static_cast <float> (RAND_MAX))  / n);
+					pp.z = zw;
+					ray.o = pp;
+					pixel_color += tracer_ptr->trace_ray(ray);
+				}
+			}
+
+			pixel_color /= vp.num_samples;
+			display_pixel(r,c, pixel_color);
+		}
+	}
+}
 
 RGBColor World::max_to_one(const RGBColor& c) const  {
 	float max_value = max(c.r, max(c.g, c.b));
@@ -83,9 +127,6 @@ RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
 	return (c);
 }
 
-
-// ---------------------------------------------------------------------------display_pixel
-
 // raw_color is the pixel color computed by the ray tracer
 // its RGB floating point components can be arbitrarily large
 // mapped_color has all components in the range [0, 1], but still floating point
@@ -94,8 +135,6 @@ RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
 // a PC'pixel_size components will probably be in the range [0, 255]
 // the system-dependent code is in the function convert_to_display_color
 // the function SetCPixel is a Mac OS function
-
-
 void World::display_pixel(const int row, const int column, const RGBColor& raw_color) const {
 	RGBColor mapped_color;
 
@@ -116,10 +155,6 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
                              (int)(mapped_color.b * 255));
 }
 
-
-
-// ----------------------------------------------------------------------------- hit_bare_bones_objects
-
 ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
 	ShadeRec	sr(*this); 
 	double		t; 			
@@ -136,12 +171,8 @@ ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
 	return (sr);   
 }
 
-
-//------------------------------------------------------------------ delete_objects
-
 // Deletes the objects in the objects array, and erases the array.
 // The objects array still exists, because it'pixel_size an automatic variable, but it'pixel_size empty 
-
 void World::delete_objects(void) {
 	int num_objects = objects.size();
 	

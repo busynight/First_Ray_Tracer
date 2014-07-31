@@ -7,7 +7,10 @@ public:
 	
 	int		hor_res;				// horizontal image resolution
 	int		ver_res;				// vertical image resolution
+	int		num_samples;			// number of samples in a pixel, it must be a perfect square
+	
 	float	pixel_size;				// pixel size
+
 
 	float	gamma;					// gamma correction factor	
 	float	inv_gamma;				// the inverse of the gamma correction factor
@@ -27,6 +30,7 @@ public:
 	//assignment operator
 	ViewPlane& operator= (const ViewPlane& rhs);
 
+
 	void set_hor_res(const int h_res);
 
 	void set_ver_res(const int v_res);
@@ -37,8 +41,13 @@ public:
 
 	void set_gamut_display(const bool show);
 
+	void set_num_of_samples(const int numSamples);
 };
 
+inline void ViewPlane::set_num_of_samples(const int numSamples){
+
+	num_samples = numSamples;
+}
 
 inline void ViewPlane::set_hor_res(const int h_res){
 
