@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Point2D.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\GeometricObject.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Plane.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Sphere.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="raytracer\Tracers\Tracer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Point2D.h" />
     <ClInclude Include="raytracer\GeometricObjects\GeometricObject.h" />
     <ClInclude Include="raytracer\GeometricObjects\Plane.h" />
     <ClInclude Include="raytracer\GeometricObjects\Sphere.h" />

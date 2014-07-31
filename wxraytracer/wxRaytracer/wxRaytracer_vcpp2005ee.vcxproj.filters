@@ -93,6 +93,9 @@
     <ClCompile Include="raytracer\Tracers\Tracer.cpp">
       <Filter>Tracers</Filter>
     </ClCompile>
+    <ClCompile Include="Point2D.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raytracer\GeometricObjects\GeometricObject.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="raytracer\Tracers\Tracer.h">
       <Filter>Tracers</Filter>
+    </ClInclude>
+    <ClInclude Include="Point2D.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
