@@ -44,14 +44,19 @@ public:
 	// randomly suffle the samples in the y-direction for each pattern
 	void shuffle_y_coordinates(void);
 
+	void map_samples_to_unit_disk(void);
+
 	// get next sample on unit square
 	Point2D sample_unit_square(void);
+
+	Point2D sample_unit_disk(void);
 
 protected:
 
 	int						num_samples;		// the number of sample points in a pattern
 	int						num_sets;			// the number of sample sets (patterns) stored
 	std::vector<Point2D>	samples;			// sample points on a unit square
+	std::vector<Point2D>	disk_samples;		// sample points on a unit circle
 	std::vector<int>		shuffled_indices;	// shuffled samples array indices
 	unsigned long			count;				// the current number of sample points used
 	int						jump;				// random index jump
