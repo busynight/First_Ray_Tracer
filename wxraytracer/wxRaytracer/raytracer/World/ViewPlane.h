@@ -1,6 +1,13 @@
 #ifndef __VIEW_PLANE__
 #define __VIEW_PLANE__
 
+#include "Sampler.h"
+#include "Regular.h"
+#include "Jittered.h"
+#include "Hammersley.h"
+#include "PureRandom.h"
+#include "MultiJittered.h"
+
 class ViewPlane{
 
 public:
@@ -11,6 +18,7 @@ public:
 	
 	float	pixel_size;				// pixel size
 
+	Sampler* sampler_ptr;
 
 	float	gamma;					// gamma correction factor	
 	float	inv_gamma;				// the inverse of the gamma correction factor
@@ -30,6 +38,9 @@ public:
 	//assignment operator
 	ViewPlane& operator= (const ViewPlane& rhs);
 
+	void set_sampler(Sampler* sp);
+
+	void set_samples(const int n);
 
 	void set_hor_res(const int h_res);
 
@@ -41,13 +52,7 @@ public:
 
 	void set_gamut_display(const bool show);
 
-	void set_num_of_samples(const int numSamples);
 };
-
-inline void ViewPlane::set_num_of_samples(const int numSamples){
-
-	num_samples = numSamples;
-}
 
 inline void ViewPlane::set_hor_res(const int h_res){
 

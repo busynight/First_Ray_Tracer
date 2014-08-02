@@ -19,15 +19,16 @@
 
 #include "Vector3D.h"
 #include "Point3D.h"
+#include "Point2D.h"
 #include "Normal.h"
 #include "ShadeRec.h"
 #include "Maths.h"
 
 // build functions
 
-#include "BuildSingleSphere.cpp"
+//#include "BuildSingleSphere.cpp"
 //#include "BuildMultipleObjects.cpp"
-//#include "BuildBBCoverPic.cpp"
+#include "BuildBBCoverPic.cpp"
 
 World::World(void) : background_color(black), tracer_ptr(NULL){}
 
@@ -41,67 +42,34 @@ World::~World(void) {
 }
 
 
-// This uses orthographic viewing along the zw axis
-/*
-void World::render_scene(void) const {
-
-	RGBColor	pixel_color;	 	
-	Ray			ray;					
-	int 		hor_res 	= vp.hor_res;
-	int 		ver_res 	= vp.ver_res;
-	float		pixel_size		= vp.pixel_size;
-	float		zw		= 100.0;			// hardwired in
-
-	ray.d = Vector3D(0, 0, -1);
-	
-	for (int r = 0; r < ver_res; r++)			// up
-		for (int c = 0; c <= hor_res; c++) {	// across 					
-			ray.o = Point3D(pixel_size * (c - hor_res / 2.0 + 0.5), pixel_size * (r - ver_res / 2.0 + 0.5), zw);
-			pixel_color = tracer_ptr->trace_ray(ray);
-			display_pixel(r, c, pixel_color);
-		}	
-}  
-
-
-//antialiasing technique with increased sampling for one pixel
-*/
 void World::render_scene(void) const{
 
 	RGBColor pixel_color;
 	Ray ray;
-	int 		hor_res 	= vp.hor_res;
-	int 		ver_res 	= vp.ver_res;
-	float		pixel_size		= vp.pixel_size;
-
 	float zw = 100.0;
-	int n = (int)sqrt((float)vp.num_samples);
-
-	Point3D pp;		//sample point on a pixel
-
+	
+	Point2D sp;
+	Point2D pp;
+	
 	ray.d = Vector3D(0,0,-1);
 
-	for (int r = 0; r < ver_res; r++){		//up
-		for(int c = 0; c <= hor_res; c++){  //across
+	for (int r = 0; r < vp.ver_res; r++){		//up
+		for(int c = 0; c <= vp.hor_res; c++){  //across
 
 			pixel_color = black;
 			
-			for (int p = 0; p < n; p++){			//up pixel
-				for (int q = 0; q < n; q++){		//accross pixel
-					//random sampling
-					//pp.x = vp.pixel_size * (c - 0.5* vp.hor_res + (q + 0.5)  / n);
-					//pp.y = vp.pixel_size * (r - 0.5* vp.ver_res + (p + 0.5)  / n);
-					//jitter sampling
-					pp.x = vp.pixel_size * (c - 0.5* vp.hor_res + (q 
-						+ static_cast <float> (rand()) / static_cast <float> (RAND_MAX))  / n);
-					pp.y = vp.pixel_size * (r - 0.5* vp.ver_res + (p 
-						+ static_cast <float> (rand()) / static_cast <float> (RAND_MAX))  / n);
-					pp.z = zw;
-					ray.o = pp;
-					pixel_color += tracer_ptr->trace_ray(ray);
-				}
+			for (int j = 0; j < vp.num_samples; j++){
+
+			sp = vp.sampler_ptr->sample_unit_square();
+			pp.x = vp.pixel_size * (c - 0.5 * vp.hor_res + sp.x);
+			pp.y = vp.pixel_size * (r - 0.5 * vp.ver_res + sp.y);
+
+			ray.o = Point3D( pp.x, pp.y, zw);
+			pixel_color += tracer_ptr->trace_ray(ray);
+
 			}
 
-			pixel_color /= vp.num_samples;
+			pixel_color /= vp.num_samples;  // average the colors
 			display_pixel(r,c, pixel_color);
 		}
 	}
