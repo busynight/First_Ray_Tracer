@@ -117,6 +117,9 @@
     <ClCompile Include="raytracer\Samplers\Hammersley.cpp">
       <Filter>Samplers</Filter>
     </ClCompile>
+    <ClCompile Include="raytracer\Cameras\Camera.cpp">
+      <Filter>Cameras</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raytracer\GeometricObjects\GeometricObject.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="raytracer\Samplers\Hammersley.h">
       <Filter>Samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Cameras\Camera.h">
+      <Filter>Cameras</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

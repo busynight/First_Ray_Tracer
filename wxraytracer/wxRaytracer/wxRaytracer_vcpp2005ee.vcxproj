@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="raytracer\Cameras\Camera.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\GeometricObject.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Plane.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Sphere.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="raytracer\Tracers\Tracer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="raytracer\Cameras\Camera.h" />
     <ClInclude Include="raytracer\GeometricObjects\GeometricObject.h" />
     <ClInclude Include="raytracer\GeometricObjects\Plane.h" />
     <ClInclude Include="raytracer\GeometricObjects\Sphere.h" />
