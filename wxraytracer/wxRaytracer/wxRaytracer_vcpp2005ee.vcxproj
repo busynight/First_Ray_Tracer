@@ -126,10 +126,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Point2D.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\GeometricObject.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Plane.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Sphere.cpp" />
+    <ClCompile Include="raytracer\Samplers\Hammersley.cpp" />
+    <ClCompile Include="raytracer\Samplers\Jittered.cpp" />
+    <ClCompile Include="raytracer\Samplers\MultiJittered.cpp" />
+    <ClCompile Include="raytracer\Samplers\NRooks.cpp" />
+    <ClCompile Include="raytracer\Samplers\PureRandom.cpp" />
+    <ClCompile Include="raytracer\Samplers\Regular.cpp" />
+    <ClCompile Include="raytracer\Samplers\Sampler.cpp" />
+    <ClCompile Include="raytracer\Utilities\Point2D.cpp" />
     <ClCompile Include="raytracer\World\ViewPlane.cpp" />
     <ClCompile Include="raytracer\World\World.cpp" />
     <ClCompile Include="raytracer\Utilities\Matrix.cpp" />
@@ -145,14 +152,20 @@
     <ClCompile Include="raytracer\Tracers\Tracer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Point2D.h" />
     <ClInclude Include="raytracer\GeometricObjects\GeometricObject.h" />
     <ClInclude Include="raytracer\GeometricObjects\Plane.h" />
     <ClInclude Include="raytracer\GeometricObjects\Sphere.h" />
+    <ClInclude Include="raytracer\Samplers\Hammersley.h" />
+    <ClInclude Include="raytracer\Samplers\Jittered.h" />
+    <ClInclude Include="raytracer\Samplers\MultiJittered.h" />
+    <ClInclude Include="raytracer\Samplers\NRooks.h" />
+    <ClInclude Include="raytracer\Samplers\PureRandom.h" />
+    <ClInclude Include="raytracer\Samplers\Regular.h" />
+    <ClInclude Include="raytracer\Samplers\Sampler.h" />
+    <ClInclude Include="raytracer\Utilities\Point2D.h" />
     <ClInclude Include="raytracer\World\ViewPlane.h" />
     <ClInclude Include="raytracer\World\World.h" />
     <ClInclude Include="raytracer\Utilities\Constants.h" />
-    <ClInclude Include="raytracer\Utilities\Maths.h" />
     <ClInclude Include="raytracer\Utilities\Matrix.h" />
     <ClInclude Include="raytracer\Utilities\Normal.h" />
     <ClInclude Include="raytracer\Utilities\Point3D.h" />

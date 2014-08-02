@@ -93,8 +93,29 @@
     <ClCompile Include="raytracer\Tracers\Tracer.cpp">
       <Filter>Tracers</Filter>
     </ClCompile>
-    <ClCompile Include="Point2D.cpp">
+    <ClCompile Include="raytracer\Samplers\Jittered.cpp">
+      <Filter>Samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracer\Samplers\MultiJittered.cpp">
+      <Filter>Samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracer\Samplers\NRooks.cpp">
+      <Filter>Samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracer\Samplers\PureRandom.cpp">
+      <Filter>Samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracer\Samplers\Regular.cpp">
+      <Filter>Samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracer\Samplers\Sampler.cpp">
+      <Filter>Samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracer\Utilities\Point2D.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracer\Samplers\Hammersley.cpp">
+      <Filter>Samplers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +135,6 @@
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="raytracer\Utilities\Constants.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="raytracer\Utilities\Maths.h">
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="raytracer\Utilities\Matrix.h">
@@ -152,8 +170,29 @@
     <ClInclude Include="raytracer\Tracers\Tracer.h">
       <Filter>Tracers</Filter>
     </ClInclude>
-    <ClInclude Include="Point2D.h">
+    <ClInclude Include="raytracer\Samplers\Jittered.h">
+      <Filter>Samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Samplers\MultiJittered.h">
+      <Filter>Samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Samplers\NRooks.h">
+      <Filter>Samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Samplers\PureRandom.h">
+      <Filter>Samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Samplers\Regular.h">
+      <Filter>Samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Samplers\Sampler.h">
+      <Filter>Samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Utilities\Point2D.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Samplers\Hammersley.h">
+      <Filter>Samplers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
