@@ -70,7 +70,6 @@ void Sampler::shuffle_x_coordinates(void){
 
 }
 
-
 void Sampler::shuffle_y_coordinates(void){
 
 	for (int p = 0; p < num_sets; p++){
@@ -87,6 +86,7 @@ void Sampler::shuffle_y_coordinates(void){
 	}
 
 }
+
 Point2D Sampler::sample_unit_square(void){
 
 	if (count % num_samples == 0)
@@ -102,6 +102,15 @@ Point2D Sampler::sample_unit_disk(void){
 		jump = (rand_int() % num_sets) * num_samples;
 
 	return( disk_samples[ 
+					jump + shuffled_indices[  jump + count++ % num_samples ]] );
+}
+
+Point3D Sampler::sample_hemisphere(void){
+	
+	if (count % num_samples == 0)
+		jump = (rand_int() % num_sets) * num_samples;
+
+	return( hemisphere_samples[ 
 					jump + shuffled_indices[  jump + count++ % num_samples ]] );
 }
 
@@ -178,5 +187,25 @@ void Sampler::map_samples_to_unit_disk(void){
 		disk_samples[i].x = r*cos(phi);
 		disk_samples[i].y = r*sin(phi);
 
+	}
+}
+
+void Sampler::map_samples_to_hemisphere(const float e){
+
+	int size = samples.size();
+	hemisphere_samples.reserve(size);
+
+	for (int j = 0; j < size; ++j){
+
+		float cos_phi = cos(2.0 * PI * samples[j].x);
+		float sin_phi = sin(2.0 * PI * samples[j].x);
+		float cos_theta = pow( (1.0 - samples[j].y), 1.0 / (e + 1.0 ));
+		float sin_theta = sqrt( 1.0 - cos_theta * cos_theta);
+
+		float pu = sin_theta * cos_phi;
+		float pv = sin_theta * sin_phi;
+		float pw = cos_theta;
+
+		hemisphere_samples.push_back( Point3D(pu, pv, pw) );
 	}
 }
