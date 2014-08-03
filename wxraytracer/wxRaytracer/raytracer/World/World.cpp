@@ -23,6 +23,7 @@
 #include "Normal.h"
 #include "ShadeRec.h"
 #include "Maths.h"
+#include "Pinhole.h"
 
 // build functions
 
@@ -30,7 +31,7 @@
 //#include "BuildMultipleObjects.cpp"
 #include "BuildBBCoverPic.cpp"
 
-World::World(void) : background_color(black), tracer_ptr(NULL){}
+World::World(void) : background_color(black), tracer_ptr(NULL), camera_ptr(NULL) {}
 
 World::~World(void) {
 	
@@ -42,39 +43,6 @@ World::~World(void) {
 }
 
 
-void World::render_scene(void) const{
-
-	RGBColor pixel_color;
-	Ray ray;
-	float zw = 100.0;
-	
-	Point2D sp;
-	Point2D pp;
-	
-	ray.d = Vector3D(0,0,-1);
-
-	for (int r = 0; r < vp.ver_res; r++){		//up
-		for(int c = 0; c <= vp.hor_res; c++){  //across
-
-			pixel_color = black;
-			
-			for (int j = 0; j < vp.num_samples; j++){
-
-			sp = vp.sampler_ptr->sample_unit_square();
-			pp.x = vp.pixel_size * (c - 0.5 * vp.hor_res + sp.x);
-			pp.y = vp.pixel_size * (r - 0.5 * vp.ver_res + sp.y);
-
-			ray.o = Point3D( pp.x, pp.y, zw);
-			pixel_color += tracer_ptr->trace_ray(ray);
-
-			}
-
-			pixel_color /= vp.num_samples;  // average the colors
-			display_pixel(r,c, pixel_color);
-		}
-	}
-}
-
 RGBColor World::max_to_one(const RGBColor& c) const  {
 	float max_value = max(c.r, max(c.g, c.b));
 	
@@ -82,6 +50,18 @@ RGBColor World::max_to_one(const RGBColor& c) const  {
 		return (c / max_value);
 	else
 		return (c);
+}
+
+void World::set_camera(Camera* c){
+
+	if(camera_ptr) {
+
+		delete camera_ptr;
+		camera_ptr = NULL;
+
+	}
+
+	camera_ptr = c;
 }
 
 // Set color to red if any component is greater than one

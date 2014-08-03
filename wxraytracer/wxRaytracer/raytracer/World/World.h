@@ -20,6 +20,7 @@
 #include "GeometricObject.h"
 #include "Sphere.h"
 #include "Ray.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -31,6 +32,7 @@ class World {
 	
 		ViewPlane					vp;
 		RGBColor					background_color;
+		Camera*						camera_ptr;
 		Tracer*						tracer_ptr;
 		Sphere 						sphere;		// for Chapter 3 only
 		vector<GeometricObject*>	objects;		
@@ -46,9 +48,9 @@ class World {
 								
 		void add_object(GeometricObject* object_ptr);
 		
-		void build(void);
+		void set_camera(Camera* c);
 
-		void render_scene(void) const;
+		void build(void);
 						
 		RGBColor max_to_one(const RGBColor& c) const;
 		
