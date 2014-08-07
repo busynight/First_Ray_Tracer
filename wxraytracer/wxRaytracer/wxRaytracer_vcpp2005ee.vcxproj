@@ -126,8 +126,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="raytracer\BRDFs\BRDF.cpp" />
+    <ClCompile Include="raytracer\BRDFs\Lambertian.cpp" />
     <ClCompile Include="raytracer\Cameras\Camera.cpp" />
     <ClCompile Include="raytracer\Cameras\Pinhole.cpp" />
+    <ClCompile Include="raytracer\Cameras\ThinLens.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\GeometricObject.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Plane.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Sphere.cpp" />
@@ -154,8 +157,11 @@
     <ClCompile Include="raytracer\Tracers\Tracer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="raytracer\BRDFs\BRDF.h" />
+    <ClInclude Include="raytracer\BRDFs\Lambertian.h" />
     <ClInclude Include="raytracer\Cameras\Camera.h" />
     <ClInclude Include="raytracer\Cameras\Pinhole.h" />
+    <ClInclude Include="raytracer\Cameras\ThinLens.h" />
     <ClInclude Include="raytracer\GeometricObjects\GeometricObject.h" />
     <ClInclude Include="raytracer\GeometricObjects\Plane.h" />
     <ClInclude Include="raytracer\GeometricObjects\Sphere.h" />

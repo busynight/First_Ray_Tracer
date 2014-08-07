@@ -24,6 +24,9 @@ public:
 
 	void set_zoom(const float z);
 
+	// implement roll rotation
+	// http://inside.mines.edu/fs_home/gmurray/ArbitraryAxisRotation/
+
 protected:
 
 	float d;
