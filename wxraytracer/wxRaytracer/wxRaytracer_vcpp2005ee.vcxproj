@@ -127,7 +127,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="raytracer\BRDFs\BRDF.cpp" />
+    <ClCompile Include="raytracer\BRDFs\GlossySpecular.cpp" />
     <ClCompile Include="raytracer\BRDFs\Lambertian.cpp" />
+    <ClCompile Include="raytracer\BRDFs\PerfectSpecular.cpp" />
     <ClCompile Include="raytracer\Cameras\Camera.cpp" />
     <ClCompile Include="raytracer\Cameras\Pinhole.cpp" />
     <ClCompile Include="raytracer\Cameras\ThinLens.cpp" />
@@ -169,7 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raytracer\BRDFs\BRDF.h" />
+    <ClInclude Include="raytracer\BRDFs\GlossySpecular.h" />
     <ClInclude Include="raytracer\BRDFs\Lambertian.h" />
+    <ClInclude Include="raytracer\BRDFs\PerfectSpecular.h" />
     <ClInclude Include="raytracer\Cameras\Camera.h" />
     <ClInclude Include="raytracer\Cameras\Pinhole.h" />
     <ClInclude Include="raytracer\Cameras\ThinLens.h" />

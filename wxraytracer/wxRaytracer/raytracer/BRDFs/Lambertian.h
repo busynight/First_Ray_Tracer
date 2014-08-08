@@ -30,6 +30,8 @@ public:
 
 	virtual RGBColor rho(const ShadeRec& sr, const Vector3D& wo) const;
 
+	void set_ka(const float k);
+
 	void set_kd( const float k);
 
 	void set_cd(const float r, const float g, const float b);
@@ -43,6 +45,11 @@ private:
 	float kd;		// diffuse reflection coefficient
 	RGBColor cd;	// diffuse color
 };
+
+inline void Lambertian::set_ka(const float k){
+
+	kd = k;
+}
 
 inline void Lambertian::set_kd(const float k){
 

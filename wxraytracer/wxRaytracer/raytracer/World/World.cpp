@@ -24,6 +24,7 @@
 // materials
 
 #include "Matte.h"
+#include "Phong.h"
 
 // utilities
 
