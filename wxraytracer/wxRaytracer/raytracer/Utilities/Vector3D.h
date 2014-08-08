@@ -63,6 +63,8 @@ public:
 	//converting a vector to a unity vector
 	void normalize(void);
 
+
+
 	//return a unit vector, and normalize the vector
 	Vector3D& hat(void);
 

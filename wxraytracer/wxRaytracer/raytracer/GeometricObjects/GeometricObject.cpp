@@ -1,16 +1,16 @@
 #include "GeometricObject.h"
 
 
-GeometricObject::GeometricObject(void) : color(black) {}
+GeometricObject::GeometricObject(void) : material_ptr(NULL), shadows(true) {}
 
-GeometricObject::GeometricObject(const GeometricObject& object) : color(object.color) {}
+GeometricObject::GeometricObject(const GeometricObject& object) : material_ptr(object.material_ptr), shadows(object.shadows) {}
 
 GeometricObject& GeometricObject::operator= (const GeometricObject& rhs) {
 
 	if(this == &rhs)
 		return *this;
 
-	color = rhs.color;
+	material_ptr = rhs.material_ptr;
 
 	return *this;
 }
@@ -24,4 +24,11 @@ void GeometricObject::set_material(Material* m){
 	material_ptr = m;
 }
 
-GeometricObject::~GeometricObject(void){}
+GeometricObject::~GeometricObject(void){
+
+	if(material_ptr){
+
+		delete material_ptr;
+		material_ptr = NULL;
+	}
+}

@@ -23,6 +23,10 @@ public:
 
 	void set_shadows(const bool s);
 
+	bool casts_shadows(void) const;
+
+	virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
+
 	virtual ~Light(void);
 
 protected:
@@ -31,5 +35,11 @@ protected:
 
 
 };
+inline void Light::set_shadows(const bool s){
+	shadows = s;
+}
 
+inline bool Light::casts_shadows(void) const{
+	return shadows;
+}
 #endif

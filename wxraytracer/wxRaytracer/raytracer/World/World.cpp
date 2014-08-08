@@ -158,7 +158,6 @@ ShadeRec World::hit_objects(const Ray& ray) {
 			sr.material_ptr = objects[j]->get_material();
 			sr.hit_point = ray.o + t * ray.d;
 			normal = sr.normal;
-			sr.color			= objects[j]->get_color(); 
 		}
 	
 	if (sr.hit_an_object) {

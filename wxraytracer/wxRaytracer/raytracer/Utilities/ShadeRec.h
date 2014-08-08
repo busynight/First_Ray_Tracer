@@ -20,7 +20,6 @@ public:
 	Point3D		hit_point;			//world coordinates of hitpoint
 	Point3D		local_hit_point;	//for attaching textures to objects
 	Normal		normal;				//normal at the hit point
-	RGBColor	color;				//apparently only used for chapter 3 of the book
 	Ray			ray;				// for specular hightlights
 	int			depth;				// recursion depth
 	double		t;					// ray parameter

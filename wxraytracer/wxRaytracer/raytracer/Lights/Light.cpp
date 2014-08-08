@@ -13,7 +13,10 @@ Light& Light::operator=(const Light& rhs){
 	shadows = rhs.shadows;
 	return *this;
 }
- 
+bool Light::in_shadow(const Ray& ray, const ShadeRec& sr) const{
+
+	return false;
+}
 Light::~Light(void){}
 
 

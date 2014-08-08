@@ -74,6 +74,7 @@ Vector3D& Vector3D::hat(void){
 	return *this;
 }
 
+
 Vector3D operator* (const Matrix& mat, const Vector3D& v) {
 	return (Vector3D(mat.m[0][0] * v.x + mat.m[0][1] * v.y + mat.m[0][2] * v.z,
 					mat.m[1][0] * v.x + mat.m[1][1] * v.y + mat.m[1][2] * v.z,

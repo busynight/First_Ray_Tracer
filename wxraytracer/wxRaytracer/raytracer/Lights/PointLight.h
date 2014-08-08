@@ -18,6 +18,8 @@ public:
 
 	virtual RGBColor L(ShadeRec& sr);
 
+	bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
+
 	void set_color(const float r, const float g, const float b);
 
 	void set_color(const RGBColor& c);
@@ -36,7 +38,7 @@ private:
 
 	float ls;
 	RGBColor color;
-	Vector3D location;
+	Point3D location;
 
 };
 

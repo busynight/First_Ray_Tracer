@@ -1,5 +1,5 @@
 #include "PointLight.h"
-
+#include "World.h"
 
 PointLight::PointLight(void) : Light(), ls(1.0), color(1.0), location(0.0) {}
 
@@ -20,6 +20,20 @@ PointLight& PointLight::operator=(const PointLight& rhs){
 
 	return *this;
 
+}
+
+bool PointLight::in_shadow(const Ray& ray, const ShadeRec& sr) const{
+
+	float t;
+	int num_objects = sr.w.objects.size();
+	float d = location.distance(ray.o);
+
+	for(int j = 0; j < num_objects; j++){
+
+		if(sr.w.objects[j]->shadow_hit(ray, t) && t < d)
+			return true;
+	}
+	return false;
 }
 
 Vector3D PointLight::get_direction(ShadeRec& sr){

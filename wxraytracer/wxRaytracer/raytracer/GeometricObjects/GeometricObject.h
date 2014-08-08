@@ -35,38 +35,20 @@ public:
 
 	Material* get_material(void) const;
 
-	void set_color(const RGBColor& c);
-
-	void set_color(const float r, const float g, const float b);
-
-	RGBColor get_color(void);
+	virtual bool shadow_hit(const Ray& ray, float& tmin) const = 0;
 
 protected:
 
 	mutable Material* material_ptr;
 
 	RGBColor color;
+	bool shadows;
 
 	//assignment operator
 	GeometricObject& operator= (const GeometricObject& rhs);
 };
 
 
-inline void GeometricObject::set_color(const RGBColor& c){
-	color = c;
-}
-
-inline void GeometricObject::set_color(const float r, const float g, const float b){
-
-	color.r =r;
-	color.g = g;
-	color.b = b;
-}
-
-inline RGBColor GeometricObject::get_color(void){
-
-	return color;
-}
 
 #endif
 
