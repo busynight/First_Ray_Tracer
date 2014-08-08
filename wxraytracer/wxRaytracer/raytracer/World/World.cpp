@@ -39,8 +39,8 @@
 // build functions
 
 //#include "BuildSingleSphere.cpp"
-//#include "BuildMultipleObjects.cpp"
-#include "BuildBBCoverPic.cpp"
+#include "BuildMultipleObjects.cpp"
+//#include "BuildBBCoverPic.cpp"
 
 World::World(void) : background_color(black), tracer_ptr(NULL), camera_ptr(NULL), ambient_ptr(new Ambient) {}
 
