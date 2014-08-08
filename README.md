@@ -3,7 +3,7 @@ First_Ray_Tracer
 
 Working on developing my first ray tracer.
 
-I am following the book - "Ray Tracing from the Ground Up, by Kevin Suffern.
+I am following the book - "Ray Tracing from the Ground Up", by Kevin Suffern.
 
 I am using the bare-bone ray tracer he provides to start my project.
 Which is found in the book's website http://www.raytracegroundup.com/
