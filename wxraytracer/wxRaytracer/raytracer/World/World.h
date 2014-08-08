@@ -21,6 +21,7 @@
 #include "Sphere.h"
 #include "Ray.h"
 #include "Camera.h"
+#include "Light.h"
 
 using namespace std;
 
@@ -33,10 +34,11 @@ class World {
 		ViewPlane					vp;
 		RGBColor					background_color;
 		Camera*						camera_ptr;
+		Light*						ambient_ptr;
 		Tracer*						tracer_ptr;
 		Sphere 						sphere;		// for Chapter 3 only
 		vector<GeometricObject*>	objects;		
-		
+		vector<Light*>				lights;
 		RenderThread* 				paintArea; 	//connection to skeleton - wxRaytracer.h
 			
 
@@ -47,8 +49,12 @@ class World {
 		~World();
 								
 		void add_object(GeometricObject* object_ptr);
+
+		void add_light(Light* light_ptr);
 		
 		void set_camera(Camera* c);
+
+		void set_ambient_light(Light* amb); 
 
 		void build(void);
 						
@@ -58,8 +64,10 @@ class World {
 		
 		void display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
 
-		ShadeRec hit_bare_bones_objects(const Ray& ray);
-						
+		// ShadeRec hit_bare_bones_objects(const Ray& ray);
+		
+		ShadeRec hit_objects(const Ray& ray);
+
 	private:
 		
 		void delete_objects(void);
@@ -71,6 +79,10 @@ class World {
 
 inline void World::add_object(GeometricObject* object_ptr) {  
 	objects.push_back(object_ptr);	
+}
+
+inline void World::add_light(Light* light_ptr) {  
+	lights.push_back(light_ptr);	
 }
 
 #endif

@@ -10,10 +10,20 @@
 #include "Plane.h"
 #include "Sphere.h"
 
+// lights
+
+#include "Ambient.h"
+#include "PointLight.h"
+
 // tracers
 
 #include "SingleSphere.h"
 #include "MultipleObjects.h"
+#include "RayCast.h"
+
+// materials
+
+#include "Matte.h"
 
 // utilities
 
@@ -31,7 +41,7 @@
 //#include "BuildMultipleObjects.cpp"
 #include "BuildBBCoverPic.cpp"
 
-World::World(void) : background_color(black), tracer_ptr(NULL), camera_ptr(NULL) {}
+World::World(void) : background_color(black), tracer_ptr(NULL), camera_ptr(NULL), ambient_ptr(new Ambient) {}
 
 World::~World(void) {
 	
@@ -62,6 +72,18 @@ void World::set_camera(Camera* c){
 	}
 
 	camera_ptr = c;
+}
+
+void World::set_ambient_light(Light* amb){
+
+	if(ambient_ptr){
+
+		delete ambient_ptr;
+		ambient_ptr = NULL;
+	}
+
+	ambient_ptr = amb;
+
 }
 
 // Set color to red if any component is greater than one
@@ -102,7 +124,7 @@ void World::display_pixel(const int row, const int column, const RGBColor& raw_c
                              (int)(mapped_color.g * 255),
                              (int)(mapped_color.b * 255));
 }
-
+/*
 ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
 	ShadeRec	sr(*this); 
 	double		t; 			
@@ -118,7 +140,35 @@ ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
 		
 	return (sr);   
 }
+*/
 
+ShadeRec World::hit_objects(const Ray& ray) {
+	ShadeRec	sr(*this);		// constructor
+	double		t; 			
+	Normal		normal;
+	Point3D		local_hit_point;
+	float		tmin 			= kHugeValue;
+	int 		num_objects 	= objects.size();
+	
+	for (int j = 0; j < num_objects; j++)
+		if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
+			sr.hit_an_object	= true;
+			tmin 				= t; 
+			sr.material_ptr = objects[j]->get_material();
+			sr.hit_point = ray.o + t * ray.d;
+			normal = sr.normal;
+			sr.color			= objects[j]->get_color(); 
+		}
+	
+	if (sr.hit_an_object) {
+
+		sr.t = tmin;
+		sr.normal = normal;
+		sr.local_hit_point = local_hit_point;
+
+	}
+	return sr;   
+}
 // Deletes the objects in the objects array, and erases the array.
 // The objects array still exists, because it'pixel_size an automatic variable, but it'pixel_size empty 
 void World::delete_objects(void) {

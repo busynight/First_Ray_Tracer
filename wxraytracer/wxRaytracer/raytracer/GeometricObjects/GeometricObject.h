@@ -8,8 +8,9 @@
 #include "Normal.h"
 #include "Ray.h"
 #include "ShadeRec.h"
-
 #include "Constants.h"
+
+class Material;
 
 class GeometricObject{
 
@@ -30,6 +31,10 @@ public:
 
 	//Making three functions that will only be valid for chapter 3
 
+	virtual void set_material(Material* mPtr);
+
+	Material* get_material(void) const;
+
 	void set_color(const RGBColor& c);
 
 	void set_color(const float r, const float g, const float b);
@@ -37,6 +42,8 @@ public:
 	RGBColor get_color(void);
 
 protected:
+
+	mutable Material* material_ptr;
 
 	RGBColor color;
 

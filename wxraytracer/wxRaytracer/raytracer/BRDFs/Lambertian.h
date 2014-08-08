@@ -3,6 +3,14 @@
 
 #include "BRDF.h"
 
+/* 
+	Lambertian is an example of perfect diffuse reflection, 
+	but no real material behaves exactly like this.
+	This is a good approximation for dull, matte materials
+	like paper and completely flat paint.
+ 
+ */
+
 class Lambertian : public BRDF{
 
 public:

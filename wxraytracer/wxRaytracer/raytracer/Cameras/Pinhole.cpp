@@ -50,7 +50,7 @@ void Pinhole::render_scene(const World& w){
 				pp.x = vp.pixel_size * ( c - 0.5 * vp.hor_res + sp.x);
 				pp.y = vp.pixel_size * ( r - 0.5 * vp.ver_res + sp.y);
 				ray.d = ray_direction(pp);
-				L += w.tracer_ptr->trace_ray(ray); //, depth);
+				L += w.tracer_ptr->trace_ray(ray, depth);
 			}
 
 			L /= vp.num_samples;
