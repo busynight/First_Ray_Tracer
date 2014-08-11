@@ -13,6 +13,7 @@
 // lights
 
 #include "Ambient.h"
+#include "AmbientOccluder.h"
 #include "PointLight.h"
 
 // tracers

@@ -137,6 +137,7 @@
     <ClCompile Include="raytracer\GeometricObjects\Plane.cpp" />
     <ClCompile Include="raytracer\GeometricObjects\Sphere.cpp" />
     <ClCompile Include="raytracer\Lights\Ambient.cpp" />
+    <ClCompile Include="raytracer\Lights\AmbientOccluder.cpp" />
     <ClCompile Include="raytracer\Lights\Directional.cpp" />
     <ClCompile Include="raytracer\Lights\Light.cpp" />
     <ClCompile Include="raytracer\Lights\PointLight.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="raytracer\GeometricObjects\Plane.h" />
     <ClInclude Include="raytracer\GeometricObjects\Sphere.h" />
     <ClInclude Include="raytracer\Lights\Ambient.h" />
+    <ClInclude Include="raytracer\Lights\AmbientOccluder.h" />
     <ClInclude Include="raytracer\Lights\Directional.h" />
     <ClInclude Include="raytracer\Lights\Light.h" />
     <ClInclude Include="raytracer\Lights\PointLight.h" />

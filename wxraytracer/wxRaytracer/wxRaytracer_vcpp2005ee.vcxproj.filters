@@ -171,6 +171,9 @@
     <ClCompile Include="raytracer\BRDFs\PerfectSpecular.cpp">
       <Filter>BRDFs</Filter>
     </ClCompile>
+    <ClCompile Include="raytracer\Lights\AmbientOccluder.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raytracer\GeometricObjects\GeometricObject.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="raytracer\BRDFs\PerfectSpecular.h">
       <Filter>BRDFs</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracer\Lights\AmbientOccluder.h">
+      <Filter>Lights</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
