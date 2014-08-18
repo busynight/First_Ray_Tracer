@@ -27,6 +27,17 @@ public:
 
 	void scale_radiance(const float b);
 
+	void set_color(const float c);
+
+	void set_color(const float r, const float g, const float b);
+
+	void set_color(const RGBColor& c);
+
+	void set_min_amount(const float c);
+
+	void set_min_amount(const RGBColor& c);
+
+
 private:
 
 	Vector3D u, v, w;
@@ -42,6 +53,30 @@ inline void AmbientOccluder::scale_radiance(const float b){
 	ls = b;
 }
 
+inline void AmbientOccluder::set_color(const float c){
+
+	color.r = c; color.g = c; color.b = c;
+}
+
+inline void  AmbientOccluder::set_color(const float r, const float g, const float b){
+
+	color.r = r; color.g = g; color.b = b;
+}
+
+inline void  AmbientOccluder::set_color(const RGBColor& c){
+
+	color.r = c.r; color.g = c.g; color.b = c.b;
+}
+
+inline void  AmbientOccluder::set_min_amount(const float c){
+
+	min_amount.r = c; min_amount.b = c; min_amount.g = c;
+}
+
+inline void  AmbientOccluder::set_min_amount(const RGBColor& c){
+
+	min_amount.r = c.r; min_amount.b = c.b; min_amount.g = c.g;
+}
 
 
 #endif

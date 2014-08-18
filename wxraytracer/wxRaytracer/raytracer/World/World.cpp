@@ -7,17 +7,21 @@
 
 // geometric objects
 
+#include "Box.h"
 #include "Plane.h"
 #include "Sphere.h"
+#include "Rectangle2D.h"
 
 // lights
 
 #include "Ambient.h"
 #include "AmbientOccluder.h"
+#include "AreaLight.h"
 #include "PointLight.h"
 
 // tracers
 
+#include "AreaLighting.h"
 #include "SingleSphere.h"
 #include "MultipleObjects.h"
 #include "RayCast.h"
@@ -26,6 +30,7 @@
 
 #include "Matte.h"
 #include "Phong.h"
+#include "Emissive.h"
 
 // utilities
 
@@ -175,12 +180,13 @@ ShadeRec World::hit_objects(const Ray& ray) {
 void World::delete_objects(void) {
 	int num_objects = objects.size();
 	
-	for (int j = 0; j < num_objects; j++) {
-		delete objects[j];
-		objects[j] = NULL;
-	}	
-	
+	if(objects.empty() ){
+		for (int j = 0; j < num_objects; j++) {
+			delete objects[j];
+			objects[j] = NULL;
+		}	
 	objects.erase (objects.begin(), objects.end());
+	}
 }
 
 

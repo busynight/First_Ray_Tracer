@@ -47,7 +47,7 @@ bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const{
 	return false;
 }
 
-bool Plane::shadow_hit(const Ray& ray, float& tmin) const{
+bool Plane::shadow_hit(const Ray& ray, double& tmin) const{
 
 	if( !shadows)
 		return false;

@@ -24,6 +24,19 @@ void GeometricObject::set_material(Material* m){
 	material_ptr = m;
 }
 
+Point3D GeometricObject::sample(void){
+	return Point3D(0.0);
+}
+
+float GeometricObject::pdf(ShadeRec& sr){
+	return 0.0;
+}
+
+Normal GeometricObject::get_normal(const Point3D& p){
+
+	return Normal();	
+}
+
 GeometricObject::~GeometricObject(void){
 
 	if(material_ptr){

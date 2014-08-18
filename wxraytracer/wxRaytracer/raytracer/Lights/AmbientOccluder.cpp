@@ -60,7 +60,7 @@ RGBColor AmbientOccluder::L(ShadeRec& sr){
 
 bool AmbientOccluder::in_shadow(const Ray& ray, const ShadeRec& sr) const{
 	
-	float t;
+	double t;
 	int num_objects = sr.w.objects.size();
 
 	for (int i = 0; i < num_objects; ++i){

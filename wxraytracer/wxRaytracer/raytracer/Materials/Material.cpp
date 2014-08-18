@@ -28,4 +28,9 @@ RGBColor Material::path_shade(ShadeRec& sr){
 	return black;
 }
 
+RGBColor Material::get_Le(ShadeRec& sr) const{
+
+	return black;
+}
+
 Material::~Material(void){}

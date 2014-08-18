@@ -19,6 +19,8 @@ public:
 	virtual ~Phong(void);
 
 	virtual RGBColor shade(ShadeRec& s);
+	
+	virtual RGBColor area_light_shade(ShadeRec& sr);
 
 	void set_ka(const float k);
 

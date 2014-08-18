@@ -27,7 +27,7 @@ public:
 
 	virtual GeometricObject* clone (void) const = 0; // virtual copy constructor
 
-	virtual bool hit (const Ray& ray, double& t, ShadeRec& pixel_size) const = 0;
+	virtual bool hit (const Ray& ray, double& t, ShadeRec& sr) const = 0;
 
 	//Making three functions that will only be valid for chapter 3
 
@@ -35,7 +35,18 @@ public:
 
 	Material* get_material(void) const;
 
-	virtual bool shadow_hit(const Ray& ray, float& tmin) const = 0;
+	virtual bool shadow_hit(const Ray& ray, double& tmin) const = 0;
+
+	void set_shadows(const bool s);
+
+
+	//Needed if future objects are light sources
+	virtual Point3D sample(void);
+
+	virtual float pdf(ShadeRec& sr);
+
+	virtual Normal get_normal(const Point3D& p);
+
 
 protected:
 
@@ -49,6 +60,9 @@ protected:
 };
 
 
+inline void GeometricObject::set_shadows(const bool s){
 
+	shadows = s;
+}
 #endif
 

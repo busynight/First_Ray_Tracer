@@ -74,7 +74,7 @@ bool Sphere::hit( const Ray& ray, double& tmin, ShadeRec& sr) const{
 	return false;
 }
 
-bool Sphere::shadow_hit(const Ray& ray, float& tmin) const{
+bool Sphere::shadow_hit(const Ray& ray, double& tmin) const{
 
 	if(!shadows)
 		return false;

@@ -23,6 +23,8 @@ public:
 
 	virtual RGBColor path_shade(ShadeRec& sr);
 
+	virtual RGBColor get_Le(ShadeRec& sr) const;
+
 private:
 
 	Material& operator=(const Material& rhs);
