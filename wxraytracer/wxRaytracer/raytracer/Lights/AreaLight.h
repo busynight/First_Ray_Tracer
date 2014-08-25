@@ -24,7 +24,7 @@ public:
 
 	virtual float G(const ShadeRec& sr) const;
 
-	virtual float pdf(ShadeRec& sr);
+	virtual float pdf(ShadeRec& sr) const;
 
 	void set_object(GeometricObject* go);
 

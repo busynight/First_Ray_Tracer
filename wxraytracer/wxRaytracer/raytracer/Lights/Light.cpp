@@ -23,7 +23,7 @@ float Light::G(const ShadeRec& sr) const{
 	return 1.0;
 }
 
-float Light::pdf(ShadeRec& sr){
+float Light::pdf(ShadeRec& sr) const{
 
 	return 1.0;
 }

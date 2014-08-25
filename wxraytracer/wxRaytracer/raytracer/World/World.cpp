@@ -18,6 +18,7 @@
 #include "AmbientOccluder.h"
 #include "AreaLight.h"
 #include "PointLight.h"
+#include "EnviromentLight.h"
 
 // tracers
 

@@ -99,7 +99,7 @@ float AreaLight::G(const ShadeRec& sr) const{
 
 }
 
-float AreaLight::pdf(ShadeRec& sr){
+float AreaLight::pdf(ShadeRec& sr) const{
 
 	return object_ptr->pdf(sr);
 }
